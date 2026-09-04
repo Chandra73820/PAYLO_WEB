@@ -19,5 +19,6 @@ jobs:
           script: |
             cd ~/PAYLO_WEB
             git pull origin main
+            docker compose down || true
             docker build -t paylo-web:1.0 .
             docker compose up -d --force-recreate
