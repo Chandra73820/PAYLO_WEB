@@ -1,0 +1,796 @@
+﻿@{
+    ViewData["Title"] = "Credit Card Percentage";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-container">
+
+    <!-- =========================================================
+         PAGE HEADER
+    ========================================================== -->
+
+    <div class="page-header">
+
+        <div>
+            <h2 class="page-title">
+                Credit Card Percentage
+            </h2>
+
+            <p class="page-subtitle">
+                Manage credit card processing percentage details
+            </p>
+        </div>
+
+        <button type="button"
+                class="btn-primary"
+                id="btnAdd">
+
+            <i class="bi bi-plus-lg"></i>
+            Add Percentage
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================================================
+         ADD / EDIT FORM
+    ========================================================== -->
+
+    <div class="common-card form-card"
+         id="percentageFormCard">
+
+        <!-- FORM HEADER -->
+
+        <div class="card-header">
+
+            <div>
+
+                <h3 class="card-title">
+
+                    <i class="bi bi-credit-card-2-front"></i>
+
+                    Credit Card Percentage
+
+                </h3>
+
+                <p class="card-description">
+                    Enter credit card percentage details
+                </p>
+
+            </div>
+
+
+            <button type="button"
+                    class="btn-close-card"
+                    id="btnCloseForm"
+                    aria-label="Close">
+
+                <i class="bi bi-x-lg"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- FORM BODY -->
+
+        <div class="card-body">
+
+            <form id="percentageForm">
+
+                <input type="hidden"
+                       id="percentageId"
+                       name="percentageId"
+                       value="0" />
+
+
+                <div class="form-grid">
+
+                    <!-- =================================================
+                         CARD TYPE
+                    ================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="cardType">
+
+                            Card Type
+
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-credit-card"></i>
+
+                            <select id="cardType"
+                                    name="cardType"
+                                    class="form-control">
+
+                                <option value="">
+                                    Select Card Type
+                                </option>
+
+                                <option value="Visa">
+                                    Visa
+                                </option>
+
+                                <option value="MasterCard">
+                                    MasterCard
+                                </option>
+
+                                <option value="RuPay">
+                                    RuPay
+                                </option>
+
+                                <option value="American Express">
+                                    American Express
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <span class="field-error"
+                              id="cardTypeError">
+                        </span>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         PERCENTAGE
+                    ================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="percentage">
+
+                            Percentage
+
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-percent"></i>
+
+                            <input type="number"
+                                   id="percentage"
+                                   name="percentage"
+                                   class="form-control"
+                                   min="0"
+                                   max="100"
+                                   step="0.01"
+                                   placeholder="Enter percentage" />
+
+                        </div>
+
+
+                        <span class="field-error"
+                              id="percentageError">
+                        </span>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         MINIMUM AMOUNT
+                    ================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="minimumAmount">
+                            Minimum Amount
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-currency-rupee"></i>
+
+                            <input type="number"
+                                   id="minimumAmount"
+                                   name="minimumAmount"
+                                   class="form-control"
+                                   min="0"
+                                   step="0.01"
+                                   placeholder="Enter minimum amount" />
+
+                        </div>
+
+
+                        <span class="field-error"
+                              id="minimumAmountError">
+                        </span>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         MAXIMUM AMOUNT
+                    ================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="maximumAmount">
+                            Maximum Amount
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-currency-rupee"></i>
+
+                            <input type="number"
+                                   id="maximumAmount"
+                                   name="maximumAmount"
+                                   class="form-control"
+                                   min="0"
+                                   step="0.01"
+                                   placeholder="Enter maximum amount" />
+
+                        </div>
+
+
+                        <span class="field-error"
+                              id="maximumAmountError">
+                        </span>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         STATUS
+                    ================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="status">
+
+                            Status
+
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-check-circle"></i>
+
+                            <select id="status"
+                                    name="status"
+                                    class="form-control">
+
+                                <option value="">
+                                    Select Status
+                                </option>
+
+                                <option value="Active">
+                                    Active
+                                </option>
+
+                                <option value="Inactive">
+                                    Inactive
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <span class="field-error"
+                              id="statusError">
+                        </span>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         EFFECTIVE DATE
+                    ================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="effectiveDate">
+
+                            Effective Date
+
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-calendar3"></i>
+
+                            <input type="date"
+                                   id="effectiveDate"
+                                   name="effectiveDate"
+                                   class="form-control" />
+
+                        </div>
+
+
+                        <span class="field-error"
+                              id="effectiveDateError">
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     FORM ACTIONS
+                ================================================== -->
+
+                <div class="form-actions">
+
+                    <button type="button"
+                            class="btn-secondary"
+                            id="btnCancel">
+
+                        <i class="bi bi-x-circle"></i>
+
+                        Cancel
+
+                    </button>
+
+
+                    <button type="submit"
+                            class="btn-primary"
+                            id="btnSave">
+
+                        <i class="bi bi-check-lg"></i>
+
+                        <span id="btnSaveText">
+                            Save Percentage
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         REPORT
+    ========================================================== -->
+
+    <div class="common-card report-card">
+
+
+        <!-- =====================================================
+             REPORT HEADER
+        ====================================================== -->
+
+        <div class="card-header report-header">
+
+            <div>
+
+                <h3 class="card-title">
+
+                    <i class="bi bi-percent"></i>
+
+                    Credit Card Percentage Report
+
+                </h3>
+
+
+                <p class="card-description">
+
+                    Search, sort and manage percentage records
+
+                </p>
+
+            </div>
+
+
+            <div class="report-actions">
+
+                <button type="button"
+                        class="btn-outline"
+                        id="btnExcel">
+
+                    <i class="bi bi-file-earmark-excel"></i>
+
+                    Excel
+
+                </button>
+
+
+                <button type="button"
+                        class="btn-outline"
+                        id="btnPrint">
+
+                    <i class="bi bi-printer"></i>
+
+                    Print
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             SEARCH / FILTER TOOLBAR
+        ====================================================== -->
+
+        <div class="table-toolbar">
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <i class="bi bi-search"></i>
+
+
+                <input type="text"
+                       id="commonSearch"
+                       class="common-search"
+                       placeholder="Search card type, percentage, amount..." />
+
+
+                <button type="button"
+                        class="search-clear"
+                        id="btnClearSearch"
+                        title="Clear Search">
+
+                    <i class="bi bi-x"></i>
+
+                </button>
+
+            </div>
+
+
+            <div class="toolbar-right">
+
+
+                <!-- STATUS FILTER -->
+
+                <div class="filter-box">
+
+                    <i class="bi bi-funnel"></i>
+
+
+                    <select id="statusFilter"
+                            class="common-select">
+
+                        <option value="">
+                            All Status
+                        </option>
+
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Inactive">
+                            Inactive
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PAGE SIZE -->
+
+                <div class="page-size-box">
+
+                    <span>
+                        Show
+                    </span>
+
+
+                    <select id="pageSize"
+                            class="page-size-select">
+
+                        <option value="5">
+                            5
+                        </option>
+
+                        <option value="10"
+                                selected>
+                            10
+                        </option>
+
+                        <option value="25">
+                            25
+                        </option>
+
+                        <option value="50">
+                            50
+                        </option>
+
+                    </select>
+
+
+                    <span>
+                        entries
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             TABLE
+        ====================================================== -->
+
+        <div class="table-responsive">
+
+            <table class="common-table"
+                   id="percentageTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th width="70">
+                            S.No
+                        </th>
+
+
+                        <th class="sortable"
+                            data-column="cardType">
+
+                            Card Type
+
+                            <i class="bi bi-arrow-down-up sort-icon"></i>
+
+                        </th>
+
+
+                        <th class="sortable text-right"
+                            data-column="percentage">
+
+                            Percentage
+
+                            <i class="bi bi-arrow-down-up sort-icon"></i>
+
+                        </th>
+
+
+                        <th class="sortable text-right"
+                            data-column="minimumAmount">
+
+                            Minimum Amount
+
+                            <i class="bi bi-arrow-down-up sort-icon"></i>
+
+                        </th>
+
+
+                        <th class="sortable text-right"
+                            data-column="maximumAmount">
+
+                            Maximum Amount
+
+                            <i class="bi bi-arrow-down-up sort-icon"></i>
+
+                        </th>
+
+
+                        <th class="sortable"
+                            data-column="status">
+
+                            Status
+
+                            <i class="bi bi-arrow-down-up sort-icon"></i>
+
+                        </th>
+
+
+                        <th class="sortable"
+                            data-column="effectiveDate">
+
+                            Effective Date
+
+                            <i class="bi bi-arrow-down-up sort-icon"></i>
+
+                        </th>
+
+
+                        <th width="120"
+                            class="text-center">
+
+                            Actions
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="percentageTableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- =====================================================
+             NO DATA
+        ====================================================== -->
+
+        <div class="no-data"
+             id="noData"
+             style="display:none;">
+
+            <div class="no-data-icon">
+
+                <i class="bi bi-inbox"></i>
+
+            </div>
+
+
+            <h4>
+                No records found
+            </h4>
+
+
+            <p>
+                No percentage records match your search criteria.
+            </p>
+
+        </div>
+
+
+        <!-- =====================================================
+             TABLE FOOTER
+        ====================================================== -->
+
+        <div class="table-footer">
+
+
+            <!-- RECORD INFORMATION -->
+
+            <div class="record-info"
+                 id="recordInfo">
+
+                Showing 0 to 0 of 0 entries
+
+            </div>
+
+
+            <!-- =================================================
+                 PAGINATION
+
+                 JavaScript will generate:
+
+                 [ Previous ] [ 1 ] [ 2 ] [ 3 ] [ Next ]
+
+            ================================================== -->
+
+            <div class="pagination"
+                 id="pagination"
+                 aria-label="Table pagination">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     DELETE MODAL
+========================================================== -->
+
+<div class="common-modal-overlay"
+     id="deleteModal"
+     style="display:none;">
+
+    <div class="common-modal">
+
+
+        <div class="modal-icon danger">
+
+            <i class="bi bi-trash"></i>
+
+        </div>
+
+
+        <h3>
+            Delete Percentage?
+        </h3>
+
+
+        <p>
+
+            Are you sure you want to delete this
+            credit card percentage?
+
+        </p>
+
+
+        <div class="modal-actions">
+
+
+            <button type="button"
+                    class="btn-secondary"
+                    id="btnDeleteCancel">
+
+                Cancel
+
+            </button>
+
+
+            <button type="button"
+                    class="btn-danger"
+                    id="btnDeleteConfirm">
+
+                <i class="bi bi-trash"></i>
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================== -->
+
+<div id="toast"
+     class="common-toast"
+     role="alert"
+     aria-live="polite">
+
+    <i class="bi bi-check-circle"></i>
+
+
+    <span id="toastMessage">
+        Successfully saved
+    </span>
+
+</div>
+
+
+<!-- =========================================================
+     PAGE JAVASCRIPT
+========================================================== -->
+@section Scripts
+{
+    <!-- COMMON TABLE JS MUST LOAD FIRST -->
+    <script src="~/js/common/common-table.js"
+            asp-append-version="true"></script>
+
+
+    <!-- CREDIT CARD PERCENTAGE JS -->
+    <script src="~/js/masters/creditcardpercentage.js"
+            asp-append-version="true"></script>
+}
+

@@ -1,0 +1,742 @@
+/* _content/PAYLO_WEB/Areas/Admin/Views/Admin/login.cshtml.rz.scp.css */
+/* =========================================================
+   PAYLO ADMIN LOGIN
+   Fintech / Recharge / BBPS / DMT / Payouts
+   ========================================================= */
+
+:root[b-t0lyq09zyn] {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary: #7c3aed;
+    --accent: #06b6d4;
+    --dark: #07111f;
+    --dark-2: #0b1728;
+    --white: #ffffff;
+    --text: #172033;
+    --muted: #718096;
+    --border: rgba(255, 255, 255, 0.18);
+    --shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*[b-t0lyq09zyn] {
+    box-sizing: border-box;
+}
+
+html[b-t0lyq09zyn],
+body[b-t0lyq09zyn] {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body[b-t0lyq09zyn] {
+    font-family: "Lexend", sans-serif;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   MAIN BACKGROUND
+   ========================================================= */
+
+.admin-wrap[b-t0lyq09zyn] {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient( circle at 10% 20%, rgba(37, 99, 235, 0.30), transparent 32% ), radial-gradient( circle at 90% 15%, rgba(124, 58, 237, 0.30), transparent 30% ), radial-gradient( circle at 80% 90%, rgba(6, 182, 212, 0.20), transparent 30% ), linear-gradient( 135deg, #06101d 0%, #0a1830 45%, #111b3d 100% );
+    padding: 40px 20px;
+}
+
+
+    /* =========================================================
+   BACKGROUND GRID
+   ========================================================= */
+
+    .admin-wrap[b-t0lyq09zyn]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient( rgba(255, 255, 255, 0.035) 1px, transparent 1px ), linear-gradient( 90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px );
+        background-size: 45px 45px;
+        mask-image: linear-gradient( to bottom, transparent, black 20%, black 80%, transparent );
+        pointer-events: none;
+    }
+
+
+    /* =========================================================
+   GLOWING ORBS
+   ========================================================= */
+
+    .admin-wrap[b-t0lyq09zyn]::after {
+        content: "";
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        background: radial-gradient( circle, rgba(37, 99, 235, 0.18), transparent 65% );
+        filter: blur(20px);
+        top: -180px;
+        right: -120px;
+        animation: orbFloat-b-t0lyq09zyn 8s ease-in-out infinite;
+    }
+
+
+@keyframes orbFloat-b-t0lyq09zyn {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-40px, 30px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+
+/* =========================================================
+   LOGIN CARD
+   ========================================================= */
+
+.login-card[b-t0lyq09zyn] {
+    width: 100%;
+    max-width: 440px;
+    position: relative;
+    z-index: 5;
+    padding: 42px 40px;
+    border-radius: 26px;
+    background: linear-gradient( 145deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 255, 0.96) );
+    box-shadow: 0 35px 90px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.15);
+    animation: cardEntry-b-t0lyq09zyn 0.8s cubic-bezier(.22, 1, .36, 1);
+    overflow: hidden;
+}
+
+
+    /* top animated line */
+
+    .login-card[b-t0lyq09zyn]::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient( 90deg, var(--primary), var(--secondary), var(--accent), var(--primary) );
+        background-size: 300% 100%;
+        animation: gradientMove-b-t0lyq09zyn 5s linear infinite;
+    }
+
+
+@keyframes gradientMove-b-t0lyq09zyn {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 300% 50%;
+    }
+}
+
+
+@keyframes cardEntry-b-t0lyq09zyn {
+
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.brand-icon[b-t0lyq09zyn] {
+    width: 82px;
+    height: 82px;
+    margin: 0 auto 20px;
+    padding: 12px;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    box-shadow: 0 12px 35px rgba(37, 99, 235, 0.18);
+    position: relative;
+    animation: logoFloat-b-t0lyq09zyn 4s ease-in-out infinite;
+}
+
+
+    .brand-icon[b-t0lyq09zyn]::before {
+        content: "";
+        position: absolute;
+        inset: -5px;
+        border-radius: 26px;
+        border: 1px solid rgba(37, 99, 235, 0.15);
+        animation: logoRing-b-t0lyq09zyn 3s ease-in-out infinite;
+    }
+
+
+    .brand-icon img[b-t0lyq09zyn] {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        position: relative;
+        z-index: 2;
+    }
+
+
+@keyframes logoFloat-b-t0lyq09zyn {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+
+@keyframes logoRing-b-t0lyq09zyn {
+
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: 0.2;
+    }
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.login-card h2[b-t0lyq09zyn] {
+    margin: 0;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+    color: #101828;
+}
+
+
+.login-card .sub[b-t0lyq09zyn] {
+    margin: 8px 0 30px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   FORM LABEL
+   ========================================================= */
+
+.form-label[b-t0lyq09zyn] {
+    display: block;
+    margin-bottom: 8px;
+    color: #344054;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   INPUT GROUP
+   ========================================================= */
+
+.input-group[b-t0lyq09zyn] {
+    position: relative;
+    display: flex;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+.input-group-text[b-t0lyq09zyn] {
+    min-width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    border: 1px solid #d9e1ec;
+    border-right: 0;
+    color: #64748b;
+    border-radius: 12px 0 0 12px;
+    transition: color 0.25s ease, background 0.25s ease;
+}
+
+
+    .input-group-text i[b-t0lyq09zyn] {
+        font-size: 19px;
+    }
+
+
+.form-control[b-t0lyq09zyn] {
+    height: 50px;
+    border: 1px solid #d9e1ec;
+    border-left: 0;
+    border-radius: 0 12px 12px 0;
+    padding: 0 15px;
+    color: #172033;
+    background: #ffffff;
+    font-family: "Lexend", sans-serif;
+    font-size: 14px;
+    box-shadow: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+
+    .form-control[b-t0lyq09zyn]::placeholder {
+        color: #98a2b3;
+    }
+
+
+    .form-control:focus[b-t0lyq09zyn] {
+        outline: none;
+        border-color: var(--primary);
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+    }
+
+
+.input-group:focus-within .input-group-text[b-t0lyq09zyn] {
+    border-color: var(--primary);
+    background: #eff6ff;
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   PASSWORD INPUT
+   ========================================================= */
+
+.no-right-radius[b-t0lyq09zyn] {
+    border-radius: 0;
+}
+
+
+.toggle-pw[b-t0lyq09zyn] {
+    width: 50px;
+    border: 1px solid #d9e1ec;
+    border-left: 0;
+    background: #ffffff;
+    color: #64748b;
+    border-radius: 0 12px 12px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+
+    .toggle-pw:hover[b-t0lyq09zyn] {
+        color: var(--primary);
+        background: #f8fafc;
+    }
+
+
+    .toggle-pw i[b-t0lyq09zyn] {
+        font-size: 20px;
+    }
+
+
+/* =========================================================
+   LOGIN BUTTON
+   ========================================================= */
+
+.btn-login[b-t0lyq09zyn] {
+    width: 100%;
+    height: 52px;
+    margin-top: 12px;
+    border: 0;
+    border-radius: 12px;
+    color: #ffffff;
+    font-family: "Lexend", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient( 135deg, #2563eb, #4f46e5, #7c3aed );
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+    .btn-login[b-t0lyq09zyn]::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.25), transparent );
+        transform: skewX(-20deg);
+        animation: buttonShine-b-t0lyq09zyn 3.5s infinite;
+    }
+
+
+@keyframes buttonShine-b-t0lyq09zyn {
+
+    0% {
+        left: -100%;
+    }
+
+    40%, 100% {
+        left: 150%;
+    }
+}
+
+
+.btn-login:hover[b-t0lyq09zyn] {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.35);
+}
+
+
+.btn-login:active[b-t0lyq09zyn] {
+    transform: translateY(0);
+}
+
+
+.btn-login:disabled[b-t0lyq09zyn] {
+    opacity: 0.75;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* =========================================================
+   SPINNER
+   ========================================================= */
+
+.spinner-border[b-t0lyq09zyn] {
+    width: 17px;
+    height: 17px;
+    border-width: 2px;
+}
+
+
+/* =========================================================
+   ERROR BOX
+   ========================================================= */
+
+.error-box[b-t0lyq09zyn] {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    color: #b42318;
+    background: #fff1f0;
+    border: 1px solid #fecdca;
+    font-size: 12px;
+    animation: errorShake-b-t0lyq09zyn 0.35s ease;
+}
+
+
+@keyframes errorShake-b-t0lyq09zyn {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-3px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* =========================================================
+   SERVER ERROR
+   ========================================================= */
+
+.alert-danger[b-t0lyq09zyn] {
+    border: 0;
+    border-radius: 10px;
+    background: #fff1f0;
+    color: #b42318;
+    font-size: 12px;
+    padding: 12px 14px;
+    animation: errorShake-b-t0lyq09zyn 0.35s ease;
+}
+
+
+    .alert-danger i[b-t0lyq09zyn] {
+        margin-right: 5px;
+    }
+
+
+/* =========================================================
+   VALIDATION
+   ========================================================= */
+
+.text-danger[b-t0lyq09zyn] {
+    display: block;
+    margin-top: 5px;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PAYMENT FLOATING ELEMENTS
+   ========================================================= */
+
+.admin-wrap .payment-shape[b-t0lyq09zyn] {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.08);
+    font-weight: 700;
+    user-select: none;
+}
+
+
+.payment-shape.rupee[b-t0lyq09zyn] {
+    font-size: 100px;
+    top: 12%;
+    left: 8%;
+    animation: paymentFloat-b-t0lyq09zyn 6s ease-in-out infinite;
+}
+
+
+.payment-shape.coin[b-t0lyq09zyn] {
+    width: 75px;
+    height: 75px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 50%;
+    right: 9%;
+    bottom: 17%;
+    animation: paymentFloat-b-t0lyq09zyn 7s ease-in-out infinite reverse;
+}
+
+
+    .payment-shape.coin[b-t0lyq09zyn]::after {
+        content: "₹";
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+    }
+
+
+@keyframes paymentFloat-b-t0lyq09zyn {
+
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-25px) rotate(8deg);
+    }
+}
+
+
+/* =========================================================
+   SMALL FINTECH PARTICLES
+   ========================================================= */
+
+.admin-wrap .particle[b-t0lyq09zyn] {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+}
+
+
+    .admin-wrap .particle:nth-child(1)[b-t0lyq09zyn] {
+        top: 18%;
+        left: 20%;
+        animation: particleMove-b-t0lyq09zyn 5s infinite;
+    }
+
+
+    .admin-wrap .particle:nth-child(2)[b-t0lyq09zyn] {
+        top: 70%;
+        left: 15%;
+        animation: particleMove-b-t0lyq09zyn 7s infinite 1s;
+    }
+
+
+    .admin-wrap .particle:nth-child(3)[b-t0lyq09zyn] {
+        top: 30%;
+        right: 18%;
+        animation: particleMove-b-t0lyq09zyn 6s infinite 2s;
+    }
+
+
+    .admin-wrap .particle:nth-child(4)[b-t0lyq09zyn] {
+        bottom: 15%;
+        right: 25%;
+        animation: particleMove-b-t0lyq09zyn 8s infinite 1.5s;
+    }
+
+
+@keyframes particleMove-b-t0lyq09zyn {
+
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: translate(25px, -30px) scale(1.8);
+        opacity: 0.7;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+    .admin-wrap[b-t0lyq09zyn] {
+        padding: 25px 15px;
+    }
+
+    .login-card[b-t0lyq09zyn] {
+        max-width: 100%;
+        padding: 35px 24px;
+        border-radius: 22px;
+    }
+
+    .brand-icon[b-t0lyq09zyn] {
+        width: 72px;
+        height: 72px;
+    }
+
+    .login-card h2[b-t0lyq09zyn] {
+        font-size: 26px;
+    }
+
+    .login-card .sub[b-t0lyq09zyn] {
+        margin-bottom: 25px;
+    }
+
+    .payment-shape.rupee[b-t0lyq09zyn] {
+        font-size: 70px;
+        left: 2%;
+    }
+
+    .payment-shape.coin[b-t0lyq09zyn] {
+        right: 2%;
+        width: 55px;
+        height: 55px;
+    }
+
+        .payment-shape.coin[b-t0lyq09zyn]::after {
+            font-size: 25px;
+        }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *[b-t0lyq09zyn],
+    *[b-t0lyq09zyn]::before,
+    *[b-t0lyq09zyn]::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+/* _content/PAYLO_WEB/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-pdj8dt7xos] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-pdj8dt7xos] {
+  color: #0077cc;
+}
+
+.btn-primary[b-pdj8dt7xos] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-pdj8dt7xos], .nav-pills .show > .nav-link[b-pdj8dt7xos] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-pdj8dt7xos] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-pdj8dt7xos] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-pdj8dt7xos] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-pdj8dt7xos] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-pdj8dt7xos] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

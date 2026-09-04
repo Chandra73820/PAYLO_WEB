@@ -1,0 +1,568 @@
+﻿/* =========================================================
+   PAYLO ADMIN LAYOUT
+========================================================= */
+
+:root {
+    --paylo-blue: #0066d6;
+    --paylo-dark-blue: #002b66;
+    --paylo-green: #73c900;
+    --paylo-light-green: #eaffd8;
+    --white: #ffffff;
+    --background: #f5f8fc;
+    --text-dark: #13213c;
+    --text-gray: #718096;
+    --border: #e8edf4;
+    --danger: #ef4444;
+    --shadow: 0 8px 30px rgba(20, 42, 80, 0.07);
+    --sidebar-width: 260px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    font-family: "Inter", sans-serif;
+    background: var(--background);
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+
+button,
+input {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   WRAPPER
+========================================================= */
+
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient( 180deg, #002b66 0%, #003d85 50%, #00275e 100% );
+    color: white;
+    box-shadow: 8px 0 30px rgba(0, 35, 90, 0.12);
+    transition: transform .35s ease;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.sidebar-logo {
+    height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+
+    .sidebar-logo img {
+        width: 185px;
+        max-height: 220px;
+        object-fit: contain;
+    }
+
+
+/* =========================================================
+   SIDEBAR CONTENT
+========================================================= */
+
+.sidebar-content {
+    flex: 1;
+    padding: 25px 14px;
+    overflow-y: auto;
+}
+
+
+.menu-title {
+    color: rgba(255,255,255,.45);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    padding: 0 15px 10px;
+}
+
+
+.second-menu {
+    margin-top: 25px;
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.sidebar-menu {
+    list-style: none;
+}
+
+
+    .sidebar-menu li {
+        margin-bottom: 5px;
+    }
+
+
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            position: relative;
+            padding: 12px 14px;
+            border-radius: 10px;
+            color: rgba(255,255,255,.82);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all .25s ease;
+        }
+
+
+            .sidebar-menu li a:hover {
+                color: white;
+                background: rgba(255,255,255,.09);
+                transform: translateX(4px);
+            }
+
+
+            .sidebar-menu li a.active {
+                color: white;
+                background: linear-gradient( 90deg, #0876e8, #70c900 );
+                box-shadow: 0 8px 20px rgba(0,0,0,.12);
+            }
+
+
+.menu-icon {
+    width: 22px;
+    min-width: 22px;
+    display: flex;
+    justify-content: center;
+    font-size: 17px;
+}
+
+
+.menu-badge {
+    margin-left: auto;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 700;
+    background: rgba(255,255,255,.15);
+}
+
+
+    .menu-badge.notification {
+        background: var(--paylo-green);
+        color: white;
+    }
+
+
+/* =========================================================
+   UPGRADE CARD
+========================================================= */
+
+.upgrade-card {
+    margin: 15px;
+    padding: 18px;
+    border-radius: 14px;
+    background: linear-gradient( 135deg, rgba(255,255,255,.14), rgba(255,255,255,.05) );
+    border: 1px solid rgba(255,255,255,.08);
+    position: relative;
+    overflow: hidden;
+}
+
+
+    .upgrade-card::after {
+        content: "";
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        right: -35px;
+        top: -35px;
+        border-radius: 50%;
+        background: rgba(115,201,0,.25);
+    }
+
+
+.upgrade-icon {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+
+.upgrade-card h4 {
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+
+.upgrade-card p {
+    color: rgba(255,255,255,.65);
+    font-size: 11px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+
+.upgrade-card button {
+    width: 100%;
+    padding: 9px;
+    border: none;
+    border-radius: 7px;
+    background: var(--paylo-green);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .25s;
+}
+
+
+    .upgrade-card button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(115,201,0,.25);
+    }
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.sidebar-footer {
+    padding: 15px;
+    color: rgba(255,255,255,.4);
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content {
+    width: calc(100% - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.top-header {
+    height: 75px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+    gap: 25px;
+    position: sticky;
+    top: 0;
+    z-index: 500;
+}
+
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+
+.sidebar-toggle {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: #f4f7fb;
+    border-radius: 9px;
+    font-size: 21px;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: .25s;
+}
+
+
+    .sidebar-toggle:hover {
+        background: var(--paylo-light-green);
+        color: var(--paylo-blue);
+    }
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.header-search {
+    width: 350px;
+    height: 42px;
+    margin-left: auto;
+    position: relative;
+}
+
+
+    .header-search i {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ba8b9;
+    }
+
+
+    .header-search input {
+        width: 100%;
+        height: 100%;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        outline: none;
+        padding: 0 15px 0 40px;
+        font-size: 12px;
+        background: #f8fafc;
+        transition: .25s;
+    }
+
+
+        .header-search input:focus {
+            background: white;
+            border-color: var(--paylo-blue);
+            box-shadow: 0 0 0 3px rgba(0,102,214,.08);
+        }
+
+
+/* =========================================================
+   HEADER RIGHT
+========================================================= */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.header-icon {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    position: relative;
+    font-size: 19px;
+    color: #4c5d76;
+    cursor: pointer;
+}
+
+
+.notification-dot {
+    position: absolute;
+    top: 2px;
+    right: 1px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background: var(--paylo-green);
+    color: white;
+    border-radius: 20px;
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+
+.profile-image {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    background: linear-gradient( 135deg, #0066d6, #73c900 );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+}
+
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+
+    .profile-info strong {
+        font-size: 12px;
+    }
+
+
+    .profile-info small {
+        color: var(--text-gray);
+        font-size: 9px;
+        margin-top: 2px;
+    }
+
+
+.profile-dropdown > i {
+    font-size: 11px;
+    margin-left: 5px;
+}
+
+
+/* =========================================================
+   PAGE CONTENT
+========================================================= */
+
+.page-content {
+    padding: 28px;
+}
+
+
+/* =========================================================
+   SIDEBAR MOBILE CLOSE
+========================================================= */
+
+.mobile-close {
+    display: none;
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.sidebar-overlay {
+    display: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 1000px) {
+
+    .header-search {
+        width: 260px;
+    }
+}
+
+
+@media(max-width: 768px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+
+        .sidebar.show {
+            transform: translateX(0);
+        }
+
+
+    .mobile-close {
+        display: flex;
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        width: 30px;
+        height: 30px;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: rgba(255,255,255,.1);
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+
+    .sidebar-overlay.show {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.45);
+        z-index: 900;
+    }
+
+
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+
+    .top-header {
+        padding: 0 15px;
+    }
+
+
+    .header-search {
+        display: none;
+    }
+
+
+    .profile-info {
+        display: none;
+    }
+
+
+    .page-content {
+        padding: 18px;
+    }
+}

@@ -1,0 +1,858 @@
+﻿@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paylo Dashboard Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a2a43, #0f5132);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .left-section {
+            flex: 1;
+            padding: 40px;
+            background: linear-gradient(160deg, #0a2a43, #0f5132);
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            color: #00ff88;
+        }
+
+        .logo p {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        .features {
+            margin-top: 30px;
+            list-style: none;
+        }
+
+            .features li {
+                margin-bottom: 15px;
+                font-size: 1.1rem;
+                color: #b8e994;
+            }
+
+        .right-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .login-form {
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+            .login-form h2 {
+                font-size: 2rem;
+                margin-bottom: 10px;
+                color: #00ff88;
+            }
+
+            .login-form p {
+                margin-bottom: 20px;
+                color: #ccc;
+            }
+
+            .login-form input {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 15px;
+                border: none;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.2);
+                color: #fff;
+                font-size: 1rem;
+            }
+
+                .login-form input::placeholder {
+                    color: #ddd;
+                }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-pw {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #00ff88;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .login-form .forgot {
+            display: block;
+            text-align: right;
+            color: #00ff88;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #00ff88;
+            color: #0a2a43;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .login-form button:hover {
+                background: #00cc6a;
+            }
+
+        .signup {
+            margin-top: 20px;
+            color: #ccc;
+        }
+
+            .signup a {
+                color: #00ff88;
+                text-decoration: none;
+            }
+
+        .error-box {
+            display: none;
+            background: rgba(255, 0, 0, 0.2);
+            color: #ffcccc;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        #btnSpinner {
+            margin-left: 10px;
+        }
+
+        .d-none {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="logo">
+               
+                <h1>Paylo</h1>
+                <p>Manage Your Credit Bills</p>
+            </div>
+            <ul class="features">
+                <li>⚡ Instant & Live Payout — Same-day Transfer</li>
+                <li>💳 BBPS Bills — 500+ Billers</li>
+                <li>🔒 Bank-grade Security & Encryption</li>
+                <li>🎧 24 x 7 Dedicated Support — Real-time Commission Tracking</li>
+            </ul>
+        </div>
+
+        <div class="right-section">
+            <form class="login-form" id="loginForm">
+                <h2>Welcome Back!</h2>
+                <p>Please login to access your dashboard</p>
+
+                <div class="error-box" id="errorBox">
+                    <span id="errorMsg">Invalid credentials.</span>
+                </div>
+
+                <input type="text" id="DistributorId" name="DistributorId" placeholder="Enter User Name" autocomplete="username" required />
+
+                <div class="password-wrapper">
+                    <input type="password" id="PassKey" name="PassKey" placeholder="Enter Password" autocomplete="current-password" required />
+                    <button type="button" class="toggle-pw" id="togglePw" aria-label="Show Password">👁</button>
+                </div>
+
+                <a href="#" class="forgot">Forgot Password?</a>
+
+                <button type="submit" id="loginBtn">
+                    <span id="btnText">Login</span>
+                    <span id="btnSpinner" class="d-none">⏳</span>
+                </button>
+
+                <p class="signup">Don't have an account? <a href="#">Sign Up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const emailInput = document.getElementById("DistributorId");
+        const pwInput = document.getElementById("PassKey");
+        const errorBox = document.getElementById("errorBox");
+        const errorMsg = document.getElementById("errorMsg");
+        const loginBtn = document.getElementById("loginBtn");
+        const btnText = document.getElementById("btnText");
+        const btnSpinner = document.getElementById("btnSpinner");
+
+        // Form Submit
+        loginForm.addEventListener("submit", function (e) {
+          const username = emailInput.value.trim();
+          const password = pwInput.value;
+          errorBox.style.display = "none";
+
+          if (!username || !password) {
+            e.preventDefault();
+            errorMsg.textContent = "Please enter your Admin Id and password.";
+            errorBox.style.display = "flex";
+            return;
+          }
+
+          loginBtn.disabled = true;
+          btnText.textContent = "Signing in...";
+          btnSpinner.classList.remove("d-none");
+        });
+
+        // Show / Hide Password
+        document.getElementById("togglePw").addEventListener("click", function () {
+          if (pwInput.type === "password") {
+            pwInput.type = "text";
+            this.textContent = "🙈";
+          } else {
+            pwInput.type = "password";
+            this.textContent = "👁";
+          }
+        });
+    </script>
+</body>
+</html>  *@
+
+
+
+
+ @using PAYLO_WEB.Models
+@model AdminLoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Paylo - Admin Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* ================================
+               LEFT PANEL
+            ================================= */
+
+        .left-panel {
+            width: 50%;
+            background: #1e3a8a;
+            color: #ffffff;
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+            .logo img {
+                width: 160px;
+                height: auto;
+            }
+
+        .tagline {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .left-panel h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .features li {
+                margin: 15px 0;
+                font-size: 15px;
+                line-height: 1.5;
+            }
+
+        /* ================================
+               RIGHT PANEL
+            ================================= */
+
+        .right-panel {
+            width: 50%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* ================================
+               LOGIN BOX
+            ================================= */
+
+        .login-box {
+            width: 100%;
+            max-width: 400px;
+            padding: 35px;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
+        }
+
+            .login-box h2 {
+                margin: 0 0 10px;
+                text-align: center;
+                color: #1e3a8a;
+                font-size: 28px;
+            }
+
+            .login-box .sub {
+                text-align: center;
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 25px;
+            }
+
+        /* ================================
+               FORM
+            ================================= */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+            .form-control:focus {
+                border-color: #1e3a8a;
+                box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.10);
+            }
+
+        /* ================================
+               PASSWORD
+            ================================= */
+
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+            .password-wrapper .form-control {
+                padding-right: 45px;
+            }
+
+        .toggle-pw {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* ================================
+               BUTTON
+            ================================= */
+
+        .btn-login {
+            width: 100%;
+            padding: 13px;
+            background: #22c55e;
+            border: none;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .btn-login:hover {
+                background: #16a34a;
+            }
+
+            .btn-login:disabled {
+                background: #16a34a;
+                cursor: not-allowed;
+            }
+
+        /* ================================
+               ERROR
+            ================================= */
+
+        .error-box {
+            display: none;
+            align-items: center;
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .alert {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .alert-danger {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .text-danger {
+            color: #dc2626;
+            font-size: 12px;
+        }
+
+        /* ================================
+               SPINNER
+            ================================= */
+
+        .spinner-border {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-left: 5px;
+            border: 2px solid #ffffff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            vertical-align: middle;
+        }
+
+        .d-none {
+            display: none;
+        }
+
+        @@keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ================================
+               RESPONSIVE
+            ================================= */
+
+        @@media (max-width: 768px) {
+
+            .container {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .left-panel {
+                width: 100%;
+                padding: 40px 25px;
+            }
+
+            .right-panel {
+                width: 100%;
+                padding: 30px 20px;
+            }
+
+            .features {
+                display: none;
+            }
+
+            .left-panel h3 {
+                margin-bottom: 0;
+            }
+
+            .tagline {
+                margin-bottom: 15px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+    
+    <div class="container">
+
+        <!-- =========================================
+             LEFT PANEL
+        ========================================== -->
+
+        <div class="left-panel">
+
+            <div class="logo">
+                <img src="/images/paylo_logo.png"
+                     alt="Paylo Logo" />
+            </div>
+
+            <div class="tagline">
+                Manage Your Credit Bills
+            </div>
+
+            <h3>
+                Recharge with Paylo
+            </h3>
+
+            <ul class="features">
+
+                <li>
+                    ⚡ Instant &amp; Live Payout
+                </li>
+
+                <li>
+                    ⏱ Same-day Transfer
+                </li>
+
+                <li>
+                    📑 BBPS Bills 500+ Billers
+                </li>
+
+                <li>
+                    🔒 Bank-grade Security &amp; Encryption
+                </li>
+
+                <li>
+                    📞 24 x 7 Dedicated Support
+                </li>
+
+                <li>
+                    📊 Real-time Commission Tracking
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- =========================================
+             RIGHT PANEL
+        ========================================== -->
+
+        <div class="right-panel">
+
+            <div class="login-box">
+
+                <h2>
+                    Admin Login
+                </h2>
+
+                <p class="sub">
+                    Sign in to your admin dashboard
+                </p>
+
+
+                <!-- =================================
+                     LOGIN FORM
+                ================================== -->
+
+                <form method="post"
+                      action="@Url.Action("Login", "Admin", new { area = "Admin" })"
+                      id="loginForm">
+
+                    @Html.AntiForgeryToken()
+
+
+                    <!-- Client Side Error -->
+
+                    <div class="error-box"
+                         id="errorBox">
+
+                        <span id="errorMsg">
+                            Invalid credentials.
+                        </span>
+
+                    </div>
+
+
+                    <!-- Server Side Error -->
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["Error"]
+                        </div>
+                    }
+
+
+                    <!-- =============================
+                         USERNAME
+                    ============================== -->
+
+                    <div class="form-group">
+
+                        <label class="form-label"
+                               for="DistributorId">
+                            User Name
+                        </label>
+
+                        <input type="text"
+                               id="DistributorId"
+                               name="DistributorId"
+                               value="@Model?.DistributorId"
+                               class="form-control"
+                               placeholder="Enter User Name"
+                               autocomplete="username" />
+
+                        <span asp-validation-for="DistributorId"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+
+                    <!-- =============================
+                         PASSWORD
+                    ============================== -->
+
+                    <div class="form-group">
+
+                        <label class="form-label"
+                               for="PassKey">
+                            Password
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input type="password"
+                                   id="PassKey"
+                                   name="PassKey"
+                                   class="form-control"
+                                   placeholder="Enter Password"
+                                   autocomplete="current-password" />
+
+                            <button type="button"
+                                    class="toggle-pw"
+                                    id="togglePw"
+                                    aria-label="Show Password">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+                        <span asp-validation-for="PassKey"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+
+                    <!-- =============================
+                         LOGIN BUTTON
+                    ============================== -->
+
+                    <button type="submit"
+                            class="btn-login"
+                            id="loginBtn">
+
+                        <span id="btnText">
+                            Sign In
+                        </span>
+
+                        <span id="btnSpinner"
+                              class="spinner-border d-none">
+                        </span>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const emailInput =
+            document.getElementById("DistributorId");
+
+        const pwInput =
+            document.getElementById("PassKey");
+
+        const errorBox =
+            document.getElementById("errorBox");
+
+        const errorMsg =
+            document.getElementById("errorMsg");
+
+        const loginBtn =
+            document.getElementById("loginBtn");
+
+        const btnText =
+            document.getElementById("btnText");
+
+        const btnSpinner =
+            document.getElementById("btnSpinner");
+
+
+        /* =========================================
+           FORM SUBMIT
+        ========================================== */
+
+        loginForm.addEventListener("submit", function (e) {
+
+            const username =
+                emailInput.value.trim();
+
+            const password =
+                pwInput.value;
+
+            errorBox.style.display = "none";
+
+
+            if (!username || !password) {
+
+                e.preventDefault();
+
+                errorMsg.textContent =
+                    "Please enter your Admin Id and password.";
+
+                errorBox.style.display =
+                    "flex";
+
+                return;
+            }
+
+
+            loginBtn.disabled = true;
+
+            btnText.textContent =
+                "Signing in...";
+
+            btnSpinner.classList.remove(
+                "d-none"
+            );
+
+        });
+
+
+        /* =========================================
+           SHOW / HIDE PASSWORD
+        ========================================== */
+
+        document
+            .getElementById("togglePw")
+            .addEventListener("click", function () {
+
+                if (pwInput.type === "password") {
+
+                    pwInput.type = "text";
+
+                    this.textContent = "🙈";
+
+                }
+                else {
+
+                    pwInput.type = "password";
+
+                    this.textContent = "👁";
+
+                }
+
+            });
+
+    </script>
+   
+</body>
+</html>
+ 
